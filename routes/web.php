@@ -17,4 +17,7 @@ Route::get('/', function () {
 
 Auth::routes();
 
-Route::get('/home', 'HomeController@index')->name('home');
+Route::get('/home', 'BlogController@index')->name('home');
+Route::get('/addBlog', 'BlogController@create')->name('addblog');
+Route::post('add/blog','BlogController@store')->name('postblog');
+Route::get('/blog/{id}','BlogController@show')->where('id', '[0-9]+');
