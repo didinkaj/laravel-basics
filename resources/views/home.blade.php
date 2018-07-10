@@ -7,7 +7,7 @@
             <div class="card-body">
                 @if (strlen($blog->body)>300))
                     {{ substr($blog->body,0,300)}}
-                    <a href="{{url('/blog/'.$blog->id)}}" class="btn btn-secondary float-right">Read more</a>
+                    <a href="{{url('/blog/'.$blog->id)}}" class=" "> ... Read more</a>
                 @else
                     {{ $blog->body}}
                 @endif

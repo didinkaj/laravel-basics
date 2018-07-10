@@ -4,6 +4,8 @@ namespace Blog\Http\Controllers;
 
 use Illuminate\Http\Request;
 
+use Blog\Blog;
+
 class HomeController extends Controller
 {
     /**
@@ -13,7 +15,7 @@ class HomeController extends Controller
      */
     public function __construct()
     {
-        $this->middleware('auth');
+     //   $this->middleware('auth');
     }
 
     /**
@@ -23,6 +25,24 @@ class HomeController extends Controller
      */
     public function index()
     {
-        return view('home');
+        $allBlogs = Blog::latest()
+            ->paginate(3);
+
+        return view('welcome',compact('allBlogs'));
+    }
+    /**
+     * Display the specified resource.
+     *
+     * @param  int $id
+     * @return \Illuminate\Http\Response
+     */
+    public function show($id)
+    {
+        //
+        $allBlogs = Blog::where('id',$id)
+            ->first();
+
+
+        return view('blogdetailsguest',compact('allBlogs'));
     }
 }

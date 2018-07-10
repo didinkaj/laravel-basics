@@ -32,7 +32,7 @@ class BlogController extends Controller
     {
         //
         $allBlogs = Blog::latest()
-             ->paginate(4);
+             ->paginate(3);
 
         return view('home',compact('allBlogs'));
     }
@@ -70,7 +70,7 @@ class BlogController extends Controller
         } else {
             $save = Blog::create(
                 [
-                    'author' => Auth::user()->name,
+                    'user_id' => Auth::id(),
                     'title' => $request->input(['title']),
                     'category' => $request->input(['category']),
                     'body' => $request->input(['body']),
@@ -101,6 +101,8 @@ class BlogController extends Controller
         //
         $allBlogs = Blog::where('id',$id)
             ->first();
+
+
         return view('blogdetails',compact('allBlogs'));
     }
 
@@ -136,5 +138,13 @@ class BlogController extends Controller
     public function destroy($id)
     {
         //
+        $delete = Blog::destroy($id);
+        if($delete){
+            session::flash('success', 'Successfully deleted Blog!');
+            return redirect('/home');
+        }else{
+            session::flash('error', 'Deletion failed, please try again');
+            return redirect('/home');
+        }
     }
 }

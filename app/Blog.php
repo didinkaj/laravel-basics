@@ -13,8 +13,13 @@ class Blog extends Model
      * @var array
      */
     protected $fillable = [
-        'title', 'category', 'body','author','published',
+        'title', 'category', 'body', 'user_id', 'published',
     ];
+
+    public function users()
+    {
+        return $this->belongsTo('Blog\User');
+    }
 
 
 }

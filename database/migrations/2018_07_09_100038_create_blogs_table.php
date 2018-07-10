@@ -18,9 +18,11 @@ class CreateBlogsTable extends Migration
             $table->string('title');
             $table->string('category');
             $table->text('body');
-            $table->string('author');
+            $table->unsignedInteger('user_id');
             $table->boolean('published')->nullable();
             $table->timestamps();
+
+            $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade')->onUpdate('cascade');
         });
     }
 

@@ -11,9 +11,8 @@
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
+Route::get('/', 'HomeController@index')->name('/');
+Route::get('/showblog/{id}','HomeController@show')->where('id', '[0-9]+');
 
 Auth::routes();
 
@@ -21,3 +20,4 @@ Route::get('/home', 'BlogController@index')->name('home');
 Route::get('/addBlog', 'BlogController@create')->name('addblog');
 Route::post('add/blog','BlogController@store')->name('postblog');
 Route::get('/blog/{id}','BlogController@show')->where('id', '[0-9]+');
+Route::delete('deleteBlog/{id}','BlogController@destroy')->where('id', '[0-9]+')->name('deleteBlog');
