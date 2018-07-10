@@ -23,6 +23,7 @@ class BlogController extends Controller
     {
         $this->middleware('auth');
     }
+
     /**
      * Display a listing of the resource.
      *
@@ -32,9 +33,9 @@ class BlogController extends Controller
     {
         //
         $allBlogs = Blog::latest()
-             ->paginate(3);
+            ->paginate(3);
 
-        return view('home',compact('allBlogs'));
+        return view('home', compact('allBlogs'));
     }
 
     /**
@@ -78,7 +79,6 @@ class BlogController extends Controller
                 ]);
 
 
-
             // redirect
             if ($save) {
                 session::flash('success', 'Blog Created Successfully ');
@@ -99,11 +99,11 @@ class BlogController extends Controller
     public function show($id)
     {
         //
-        $allBlogs = Blog::where('id',$id)
+        $allBlogs = Blog::where('id', $id)
             ->first();
 
 
-        return view('blogdetails',compact('allBlogs'));
+        return view('blogdetails', compact('allBlogs'));
     }
 
     /**
@@ -115,6 +115,11 @@ class BlogController extends Controller
     public function edit($id)
     {
         //
+        $allBlogs = Blog::where('id', $id)
+            ->first();
+
+
+        return view('editblog', compact('allBlogs'));
     }
 
     /**
@@ -127,6 +132,37 @@ class BlogController extends Controller
     public function update(Request $request, $id)
     {
         //
+        //
+        $validator = Validator::make($request->all(), [
+            'title' => 'required|max:255|string',
+            'category' => 'required|max:255|string',
+            'body' => 'required|string'
+        ]);
+        if ($validator->fails()) {
+            session::flash('error', 'Blog updation failed, Check the form and try again');
+            return redirect('/addBlog')
+                ->withErrors($validator)
+                ->withInput();
+        } else {
+            $save = Blog::where('id', $id)
+                ->where('user_id', Auth::id())
+                ->update(
+                    [
+                        'user_id' => Auth::id(),
+                        'title' => $request->input(['title']),
+                        'category' => $request->input(['category']),
+                        'body' => $request->input(['body']),
+                        'published' => 0,
+                    ]);
+            // redirect
+            if ($save) {
+                session::flash('success', 'Blog Created Successfully ');
+                return redirect('/blog/'.$id);
+            } else {
+                session::flash('error', 'Blog Task not saved, try again!');
+                return redirect('/blog/'.$id);
+            }
+        }
     }
 
     /**
@@ -139,10 +175,10 @@ class BlogController extends Controller
     {
         //
         $delete = Blog::destroy($id);
-        if($delete){
+        if ($delete) {
             session::flash('success', 'Successfully deleted Blog!');
             return redirect('/home');
-        }else{
+        } else {
             session::flash('error', 'Deletion failed, please try again');
             return redirect('/home');
         }

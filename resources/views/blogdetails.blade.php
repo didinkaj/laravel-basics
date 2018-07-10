@@ -16,7 +16,7 @@
         <div class="card-body">
             {{ $allBlogs->body}}
             <br/>
-            <button class="btn btn-primary  float-right mt-4">Edit</button>
+            <a href="{{url('editblog/'.$allBlogs->id)}}" class="btn btn-primary  float-right mt-4">Edit</a>
         </div>
 
 

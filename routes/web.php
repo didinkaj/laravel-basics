@@ -20,4 +20,9 @@ Route::get('/home', 'BlogController@index')->name('home');
 Route::get('/addBlog', 'BlogController@create')->name('addblog');
 Route::post('add/blog','BlogController@store')->name('postblog');
 Route::get('/blog/{id}','BlogController@show')->where('id', '[0-9]+');
+Route::get('/editblog/{id}','BlogController@edit')->where('id','[0-9]+')->name('editblog');
+Route::patch('/edit/blog/{id}', 'BlogController@update')->where('id', '[0-9]+');
 Route::delete('deleteBlog/{id}','BlogController@destroy')->where('id', '[0-9]+')->name('deleteBlog');
+
+Route::post('/subscribe', 'SubscribeController@store')->name('subscribe');
+

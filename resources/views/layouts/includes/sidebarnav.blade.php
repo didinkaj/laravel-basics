@@ -11,7 +11,7 @@
             </ul>
             @else
                 <div class="card-header">subscribe</div>
-                <form method="POST" action="{{ route('login') }}" aria-label="{{ __('Login') }}">
+                <form method="POST" action="{{ route('subscribe') }}" >
                     @csrf
 
                     <div class="form-group row mt-4 p-2">
