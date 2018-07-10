@@ -29,6 +29,11 @@
                                     </span>
                             @endif
                         </div>
+                        <div class=" col-md-4 offset-4 ">
+                            <button type="submit" class="btn btn-danger float-right ">
+                                Subscribe
+                            </button>
+                        </div>
                     </div>
                 </form>
                 @endauth
