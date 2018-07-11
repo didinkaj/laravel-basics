@@ -21,5 +21,11 @@ class Blog extends Model
         return $this->belongsTo('Blog\User');
     }
 
+    //mutators
+    public function setTitleAttribute($value)
+    {
+        $this->attributes['title'] = ucwords($value);
+    }
+
 
 }

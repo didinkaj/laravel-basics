@@ -27,7 +27,7 @@
     @include('layouts.includes.topbarnav')
 
     <!--start of page -->
-    <div class="container mh-100">
+    <div class="container">
         <div class="row content">
             <!-- content -->
             @include('slots.error')
