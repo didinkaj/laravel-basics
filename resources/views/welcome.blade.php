@@ -11,7 +11,9 @@
                 @else
                     {{ $blog->body}}
                 @endif
+                    <p>Written By <b>{{$blog->user->name}}</b></p>
             </div>
+
 
         </div>
     @endforeach

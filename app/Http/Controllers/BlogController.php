@@ -1,6 +1,7 @@
 <?php
 
 namespace Blog\Http\Controllers;
+
 use Blog\Repositories\Blog\BlogRepository;
 
 use Illuminate\Http\Request;
@@ -14,6 +15,7 @@ use Session;
 class BlogController extends Controller
 {
     private $blogRepo;
+
     /**
      * Create a new controller instance.
      *
@@ -33,7 +35,7 @@ class BlogController extends Controller
     public function index()
     {
         //get page blogs
-        $allBlogs = $this-> blogRepo->getPaginationBlogs();
+        $allBlogs = $this->blogRepo->getPaginationBlogs();
         return view('home', compact('allBlogs'));
     }
 
@@ -69,7 +71,7 @@ class BlogController extends Controller
                 ->withInput();
         } else {
 
-            if ($this-> blogRepo->saveBlog($request)) {
+            if ($this->blogRepo->saveBlog($request)) {
                 session::flash('success', 'Blog Created Successfully ');
                 return redirect('/home');
             } else {
@@ -126,17 +128,17 @@ class BlogController extends Controller
         ]);
         if ($validator->fails()) {
             session::flash('error', 'Blog updation failed, Check the form and try again');
-            return redirect('/blog/'.$id)
+            return redirect('/blog/' . $id)
                 ->withErrors($validator)
                 ->withInput();
         } else {
 
             if ($this->blogRepo->update($request, $id)) {
                 session::flash('success', 'Blog updation Successfully ');
-                return redirect('/blog/'.$id);
+                return redirect('/blog/' . $id);
             } else {
                 session::flash('error', 'Blog Task not saved, try again!');
-                return redirect('/blog/'.$id);
+                return redirect('/blog/' . $id);
             }
         }
     }

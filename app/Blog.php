@@ -2,10 +2,17 @@
 
 namespace Blog;
 
+use Illuminate\Database\Eloquent\SoftDeletes;
+
 use Illuminate\Database\Eloquent\Model;
+
 
 class Blog extends Model
 {
+    use SoftDeletes;
+
+
+    protected $dates = ['deleted_at'];
     //
     /**
      * The attributes that are mass assignable.
@@ -16,7 +23,7 @@ class Blog extends Model
         'title', 'category', 'body', 'user_id', 'published',
     ];
 
-    public function users()
+    public function user()
     {
         return $this->belongsTo('Blog\User');
     }
@@ -25,6 +32,11 @@ class Blog extends Model
     public function setTitleAttribute($value)
     {
         $this->attributes['title'] = ucwords($value);
+    }
+    //scope to include deleted blogs
+    public function scopeTrial($query)
+    {
+        return $query->onlyTrashed();
     }
 
 

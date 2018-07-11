@@ -20,6 +20,7 @@ class CreateBlogsTable extends Migration
             $table->text('body');
             $table->unsignedInteger('user_id');
             $table->boolean('published')->nullable();
+            $table->softDeletes();
             $table->timestamps();
 
             $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade')->onUpdate('cascade');

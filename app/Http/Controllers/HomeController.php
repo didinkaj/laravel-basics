@@ -2,9 +2,9 @@
 
 namespace Blog\Http\Controllers;
 
-use Illuminate\Http\Request;
 
-use Blog\Blog;
+use Blog\Repositories\Blog\BlogRepository;
+
 
 class HomeController extends Controller
 {
@@ -13,9 +13,12 @@ class HomeController extends Controller
      *
      * @return void
      */
-    public function __construct()
+    public $blogRepo;
+
+
+    function __construct(BlogRepository $blogRepository)
     {
-     //   $this->middleware('auth');
+        $this->blogRepo = $blogRepository;
     }
 
     /**
@@ -25,8 +28,7 @@ class HomeController extends Controller
      */
     public function index()
     {
-        $allBlogs = Blog::latest()
-            ->paginate(3);
+        $allBlogs = $this->blogRepo->getallBlogs();
 
         return view('welcome',compact('allBlogs'));
     }
@@ -39,9 +41,7 @@ class HomeController extends Controller
     public function show($id)
     {
         //
-        $allBlogs = Blog::where('id',$id)
-            ->first();
-
+        $allBlogs = $this->blogRepo->findBlog($id);
 
         return view('blogdetailsguest',compact('allBlogs'));
     }
