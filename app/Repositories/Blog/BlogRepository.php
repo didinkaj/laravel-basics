@@ -17,16 +17,16 @@ class BlogRepository
     }
 
 
-    public function getPaginationBlogs()
+    public function getAllBlogs()
     {
         return Blog::latest()->with('user')->paginate(3);
        // dd(Blog::deleted()->get());
 
     }
-    public function getallBlogs()
+    public function getUnPublishedBlogs()
     {
        // ret Blog::all();
-        return Blog::trial()->with('user')->latest()->paginate(3);
+        return Blog::GetDeleted()->with('user')->latest()->paginate(3);
 
     }
 

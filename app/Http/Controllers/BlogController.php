@@ -35,7 +35,7 @@ class BlogController extends Controller
     public function index()
     {
         //get page blogs
-        $allBlogs = $this->blogRepo->getPaginationBlogs();
+        $allBlogs = $this->blogRepo->getAllBlogs();
         return view('home', compact('allBlogs'));
     }
 
@@ -159,5 +159,10 @@ class BlogController extends Controller
             session::flash('error', 'Deletion failed, please try again');
             return redirect('/home');
         }
+    }
+    public function unpublished(){
+        //get unpublished blogs
+        $allBlogs = $this->blogRepo->getUnPublishedBlogs();
+        return view('home', compact('allBlogs'));
     }
 }

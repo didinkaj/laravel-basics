@@ -28,7 +28,7 @@ class HomeController extends Controller
      */
     public function index()
     {
-        $allBlogs = $this->blogRepo->getallBlogs();
+        $allBlogs = $this->blogRepo->getAllBlogs();
 
         return view('welcome',compact('allBlogs'));
     }

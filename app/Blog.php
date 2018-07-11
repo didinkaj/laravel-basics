@@ -34,7 +34,7 @@ class Blog extends Model
         $this->attributes['title'] = ucwords($value);
     }
     //scope to include deleted blogs
-    public function scopeTrial($query)
+    public function scopeGetDeleted($query)
     {
         return $query->onlyTrashed();
     }
