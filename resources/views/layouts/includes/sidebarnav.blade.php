@@ -5,7 +5,7 @@
             <ul class="list-group">
                 <li class="list-group-item"><a href="{{url('/addBlog')}}">Add blog</a></li>
                 <li class="list-group-item"><a href="{{url('/unpublished')}}">UnPublished blogs <span
-                                class="badge float-right">{{count($allBlogsForAll)}}</span> </a></li>
+                                class="badge float-right"></span> </a></li>
                 <li class="list-group-item"><a href="#">Registered users <span
                                 class="badge float-right">{{ $allusersno }}</span></a></li>
             </ul>
