@@ -42,7 +42,7 @@ class AuthHttpTest extends TestCase
     {
         $this->loginUser();
 
-        $response = $this->get('editblog/5');
+        $response = $this->get('/home');
 
         $response->assertStatus(200);
 
